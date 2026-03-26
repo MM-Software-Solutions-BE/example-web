@@ -116,14 +116,14 @@ Privacybeleid, **cookie- en analyticskeuze**, sector-specifieke disclaimers, ver
 
 ---
 
-## 18. Launch & nazorg
+## 16. Launch & nazorg
 
 *Wat moet kloppen vóór en net na livegang?*  
 Domein en HTTPS, testen op mobiel/desktop, **kritieke flows** (formulier, mail), inhoudelijke **laatste check**, wat gebeurt er na launch (onderhoud, updates).
 
 ---
 
-## 19. Bewust niet gedaan of uitgesteld
+## 17. Bewust niet gedaan of uitgesteld
 
 *Scope-afbakening in één lijst.*  
 Features, pagina’s of content die **bewust** weggelaten zijn of naar later schuiven — voorkomt scope-creep.
