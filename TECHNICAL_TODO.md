@@ -54,6 +54,8 @@
   - Contact/backend (bv. Formspree of eigen API): env voor keys; redirect- en return-URL’s op **hetzelfde productiedomein** als `metadataBase` / site-URL
 
 - **Veiligheid & platform**
+  - Teamafspraak: publieke config (site URL, analytics ID, Formspree ID, Search Console token, feature flags) mag in `src/config/site.ts`
+  - Bij deze sites zijn echte secrets meestal afwezig;
   - Security headers in `next.config` (CSP waar haalbaar; HSTS vaak via host)
   - `.env.example`; geen secrets in git; HTTPS + productiedomein
   - SPF, DKIM, DMARC als je mail vanaf het domein stuurt
