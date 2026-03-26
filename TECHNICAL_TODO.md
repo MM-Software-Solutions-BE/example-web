@@ -64,3 +64,9 @@
   - Optioneel: error monitoring (bv. Sentry)
   - Af en toe: `npm audit` / Dependabot
   - Vóór launch: kritieke flows op **productie** testen (o.a. contact / mail); privacytekst juridisch laten nakijken indien nodig
+
+- **Anti-pattern checks (snel nazien)**
+  - Geen dubbele analytics-injectie (bv. niet tegelijk in `layout` én aparte component)
+  - Geen hardcoded productie-URL’s in `layout`/`sitemap`; gebruik env + gedeelde helper
+  - Geen `#fragment`-URL’s in `sitemap.xml`
+  - Geen hardcoded keys/IDs in code; via env
