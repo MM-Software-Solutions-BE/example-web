@@ -6,17 +6,20 @@
   - `metadataBase` + productie-URL uit env
   - Titel-template; canonical; bij meertalig: hreflang / `x-default`
   - Open Graph + Twitter cards; vast OG-beeld (bv. 1200×630) of dynamische `opengraph-image`
+  - `metadata.robots` per route waar nodig (bv. `noindex` op 404)
+  - Site-eigendom: `verification` (Google Search Console, Bing, …)
   - JSON-LD (Organization, WebSite, evt. BreadcrumbList)
 
 - **Robots & sitemap**
   - `robots.ts` → `/robots.txt` (incl. link naar sitemap)
-  - `sitemap.ts` → `/sitemap.xml`
+  - `sitemap.ts` → `/sitemap.xml` — alleen echte paden, geen `#fragmenten`; zelfde basis-URL als productie
 
 - **App-tab & PWA-light**
   - Favicon / `icon` / `apple-icon`
-  - `manifest.ts`
-  - `viewport` + `themeColor`
+  - Web App Manifest (`manifest.ts` of statisch `public/manifest.json`)
+  - `viewport` + `themeColor` *(let op: `maximumScale: 1` beperkt zoom — a11y-afweging)*
   - Fonts: `next/font`, `display: swap`, geen overbodige weights
+  - Thema-toggle (`next-themes`): waar nodig `suppressHydrationWarning` op `<html>`
 
 - **Taal & routing** *(alleen als je i18n doet)*
   - `middleware` voor locale-prefix / redirects
@@ -25,13 +28,22 @@
 
 - **Privacy & meten**
   - Cookiemelding + consent-state; default denied tot keuze als je analytics gebruikt
-  - GA4 alleen met ID + na toestemming
+  - GA4 alleen met ID + na toestemming; **één injectiepad** (niet tegelijk hardcoded in `<head>` én in een component)
   - Privacytekst dekt cookies / analytics mee
 
 - **UX & performance**
   - `not-found.tsx`
+  - `loading.tsx` (route loading UI) waar het de moeite is
+  - `error.tsx` / `global-error.tsx` voor foutgrenzen (optioneel maar netjes)
   - Skip link naar `#main`
   - `next/image` met sizes / lazy waar passend
+
+- **Next.js-config**
+  - `images.formats` (bv. AVIF/WebP), `images.remotePatterns` voor externe URL’s
+  - `experimental.optimizePackageImports` voor grote import-barrels (bv. iconen)
+
+- **Integraties**
+  - Contact/backend (bv. Formspree of eigen API): env voor keys, productie-redirect-URL’s (`_next` / return URL)
 
 - **Veiligheid & platform**
   - Security headers in `next.config` (CSP waar haalbaar; HSTS vaak via host)
