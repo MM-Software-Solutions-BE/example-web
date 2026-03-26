@@ -37,13 +37,21 @@
   - `error.tsx` / `global-error.tsx` voor foutgrenzen (optioneel maar netjes)
   - Skip link naar `#main`
   - `next/image` met sizes / lazy waar passend
+  - LCP-kritieke assets (vaak hero) comprimeren; lazy load onder de vouw
+  - Periodiek **Tab** door primaire flows: zichtbare focus op nieuwe UI
+
+- **Layout & design tokens**
+  - Eén patroon voor **contentbreedte** (`max-w-*` + horizontale padding) zodat secties niet “springen”
+  - **Eén kleurensysteem** (design tokens / CSS-variabelen); geen parallelle willekeurige palette-classes door de site
+  - Productie-home **zonder** default Next/Vercel-templatemarketing en losse placeholder-assets als “site”
+
 
 - **Next.js-config**
   - `images.formats` (bv. AVIF/WebP), `images.remotePatterns` voor externe URL’s
   - `experimental.optimizePackageImports` voor grote import-barrels (bv. iconen)
 
 - **Integraties**
-  - Contact/backend (bv. Formspree of eigen API): env voor keys, productie-redirect-URL’s (`_next` / return URL)
+  - Contact/backend (bv. Formspree of eigen API): env voor keys; redirect- en return-URL’s op **hetzelfde productiedomein** als `metadataBase` / site-URL
 
 - **Veiligheid & platform**
   - Security headers in `next.config` (CSP waar haalbaar; HSTS vaak via host)
@@ -55,3 +63,4 @@
   - Lighthouse / Core Web Vitals vóór launch
   - Optioneel: error monitoring (bv. Sentry)
   - Af en toe: `npm audit` / Dependabot
+  - Vóór launch: kritieke flows op **productie** testen (o.a. contact / mail); privacytekst juridisch laten nakijken indien nodig
