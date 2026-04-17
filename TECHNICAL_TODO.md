@@ -9,9 +9,11 @@
   - `metadata.robots` per route waar nodig (bv. `noindex` op 404)
   - Site-eigendom: `verification` (Google Search Console, Bing, …)
   - JSON-LD (Organization, WebSite, evt. BreadcrumbList)
+  - JSON-LD liefst **SSR** (in server component/layout), niet alleen client-side injectie in `"use client"` pages
 
 - **Robots & sitemap**
   - `robots.ts` → `/robots.txt` (incl. link naar sitemap)
+  - Strak: `disallow` technische paden (minstens `/_next/` en `/api/`) om crawlbudget te sparen
   - `sitemap.ts` → `/sitemap.xml` — alleen echte paden, geen `#fragmenten`; zelfde basis-URL als productie
 
 - **App-tab & PWA-light**
@@ -33,7 +35,8 @@
 - **Taal & routing** *(alleen als je i18n doet)*
   - `middleware` voor locale-prefix / redirects
   - `generateStaticParams` waar nodig
-  - Correcte `<html lang>`
+  - Correcte `<html lang>` **server-side** (niet enkel client-side sync)
+  - Leg expliciet vast wat `x-default` is (default locale) en hou dat consistent in `hreflang`
 
 - **Privacy & meten**
   - Cookiemelding + consent-state; default denied tot keuze als je analytics gebruikt
