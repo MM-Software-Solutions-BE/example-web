@@ -16,6 +16,15 @@
 
 - **App-tab & PWA-light**
   - Favicon / `icon` / `apple-icon`
+  - **Icon-aanpak (aanrader, consistent met projecten hierboven)**
+    - Zet één bron in `public/` (liefst `public/favicon.svg`; eventueel ook `favicon.png`/`favicon.ico` als fallback).
+    - Zet in `src/app/layout.tsx`:
+      - `metadata.icons` → naar `/favicon.svg` (icon + shortcut + apple).
+      - `metadata.manifest` → `"/manifest.webmanifest"`.
+    - Zet in `src/app/manifest.ts`:
+      - `icons[]` → naar `/favicon.svg` met `purpose: "maskable"`.
+    - Optioneel (entity/brand): in JSON-LD `Organization.logo` → absolute URL naar `/favicon.svg`.
+    - Cleanup: verwijder ongebruikte template assets zoals `public/vercel.svg`.
   - Web App Manifest (`manifest.ts` of statisch `public/manifest.json`)
   - `viewport` + `themeColor` *(let op: `maximumScale: 1` beperkt zoom — a11y-afweging)*
   - Fonts: `next/font`, `display: swap`, geen overbodige weights
