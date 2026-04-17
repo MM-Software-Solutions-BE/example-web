@@ -21,12 +21,14 @@
 - [ ] **`metadata.robots`**: op `not-found` vaak `noindex` (en eventueel `nofollow`); overige routes `index` tenzij bewust anders.
 - [ ] **Site-eigendom**: `verification.google` (en evt. Bing) via env, bv. `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` — alleen de **content**-waarde van de meta-tag, geen volledige HTML.
 - [ ] **JSON-LD**: minimaal `Organization` + `WebSite` (`logo`, `url`, `email` waar van toepassing); optioneel `BreadcrumbList` op diepe pagina’s.
+  - [ ] Liefst **SSR** (server component/layout), niet alleen client-side injectie in `"use client"` pages.
 
 ---
 
 ## Robots & sitemap
 
 - [ ] **`src/app/robots.ts`** → `/robots.txt` met `sitemap: ${SITE_URL}/sitemap.xml` (of env-basis-URL).
+- [ ] Strak: `disallow` technische paden (minstens `/_next/` en `/api/`) om crawlbudget te sparen.
 - [ ] **`src/app/sitemap.ts`** → `/sitemap.xml`:
   - Alle **indexeerbare** routes, incl. **alle taalvarianten** (`/nl/...`, `/en/...`) en subpagina’s (bv. `/peers`, `/privacy`) als die eigen URL’s hebben.
   - Geen `#fragmenten`; zelfde host als productie.
@@ -37,6 +39,15 @@
 ## App-tab & PWA-light
 
 - [ ] **Favicon**: `app/icon.tsx` / `app/apple-icon.tsx` of vaste assets in `public/`.
+- [ ] **Icon-aanpak (aanrader, consistent met projecten hierboven)**
+  - [ ] Zet één bron in `public/` (liefst `public/favicon.svg`; eventueel ook `favicon.png`/`favicon.ico` als fallback).
+  - [ ] Zet in `src/app/layout.tsx`:
+    - `metadata.icons` → naar `/favicon.svg` (icon + shortcut + apple).
+    - `metadata.manifest` → `"/manifest.webmanifest"`.
+  - [ ] Zet in `src/app/manifest.ts`:
+    - `icons[]` → naar `/favicon.svg` met `purpose: "maskable"`.
+  - [ ] Optioneel (entity/brand): in JSON-LD `Organization.logo` → absolute URL naar `/favicon.svg`.
+  - [ ] Cleanup: verwijder ongebruikte template assets zoals `public/vercel.svg`.
 - [ ] **`manifest.ts`** (of `public/manifest.webmanifest`) — `name`, `start_url`, `theme_color`, `icons`.
 - [ ] **`viewport`** + **`themeColor`**; geen `maximumScale: 1` tenzij bewuste keuze (beperkt zoom → a11y).
 - [ ] **Fonts**: `next/font`, `display: "swap"`, geen overbodige weights importeren.
@@ -53,6 +64,8 @@
   - [ ] **Root-metadata uitzonderingen**: segmenten als `icon`, `apple-icon`, `opengraph-image`, `twitter-image`, `manifest.webmanifest` **geen** locale-prefix (anders breekt favicon/OG).
 - [ ] **`generateStaticParams`** op `[locale]` (en dynamische segmenten).
 - [ ] **`<html lang>`**: client `HtmlLangSync` op basis van eerste path-segment, of server alleen als je geen client nodig hebt.
+- [ ] **`<html lang>`** liefst **server-side** correct (niet enkel client-side sync), zodat crawlers meteen de juiste taal zien.
+- [ ] Leg expliciet vast wat `x-default` is (default locale) en hou dat consistent in `hreflang`.
 - [ ] **Taalwissel**: `Link` naar andere locale (`/${andereTaal}${tail}`), geen alleen `localStorage` zonder URL.
 
 ---
